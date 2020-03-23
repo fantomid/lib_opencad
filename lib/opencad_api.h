@@ -42,6 +42,7 @@ enum CADVersions
     DWG_R2007 = 1021,
     DWG_R2010 = 1024,
     DWG_R2013 = 1027,
+    DWG_R2018 = 1032,
     DXF_UNDEF = -1000,
     DXF_R13   = -DWG_R13,
     DXF_R14   = -DWG_R14,
@@ -49,7 +50,8 @@ enum CADVersions
     DXF_R2004 = -DWG_R2004,
     DXF_R2007 = -DWG_R2007,
     DXF_R2010 = -DWG_R2010,
-    DXF_R2013 = -DWG_R2013
+    DXF_R2013 = -DWG_R2013,
+    DXF_R2018 = -DWG_R2018
 };
 
 enum CADErrorCodes
@@ -80,5 +82,6 @@ OCAD_EXTERN int GetLastErrorCode();
 OCAD_EXTERN CADFileIO * GetDefaultFileIO( const char * pszFileName );
 OCAD_EXTERN int IdentifyCADFile( CADFileIO * pCADFileIO, bool bOwn = true );
 OCAD_EXTERN const char * GetCADFormats();
+OCAD_EXTERN const char * GetCADFileFormat( const char * pszFileName );
 
 #endif // OPENCAD_API_H

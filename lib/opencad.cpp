@@ -39,6 +39,25 @@
 #include <iostream>
 
 static int gLastError = CADErrorCodes::SUCCESS;
+static const char * gszCADVersions [] = {
+    "Unknown",
+    "DWG_R13",
+    "DWG_R14",
+    "DWG_R2000",
+    "DWG_R2004",
+    "DWG_R2007",
+    "DWG_R2010",
+    "DWG_R2013",
+    "DWG_R2018",
+    "DXF_R13",
+    "DXF_R14",
+    "DXF_R2000",
+    "DXF_R2004",
+    "DXF_R2007",
+    "DXF_R2010",
+    "DXF_R2013",
+    "DXF_R2018"
+};
 
 /**
  * @brief Check CAD file
@@ -116,6 +135,74 @@ CADFile * OpenCADFile( CADFileIO * pCADFileIO, enum CADFile::OpenOptions eOption
     return poCAD;
 }
 
+/**
+ * @brief Get file version string
+ * @return file CAD version
+ */
+const char * GetCADFileFormat( const char * pszFileName )
+{
+    int iVersion = IdentifyCADFile( GetDefaultFileIO( pszFileName ) );
+    int iIndex = -1;
+    switch(iVersion)
+    {
+        case DWG_R13:
+            iIndex = 1;
+        break;
+        case DWG_R14:
+            iIndex = 2;
+        break;
+        case DWG_R2000:
+            iIndex = 3;
+        break;
+        case DWG_R2004:
+            iIndex = 4;
+        break;
+        case DWG_R2007:
+            iIndex = 5;
+        break;
+        case DWG_R2010:
+            iIndex = 6;
+        break;
+        case DWG_R2013:
+            iIndex = 7;
+        break;
+        case DWG_R2018:
+            iIndex = 8;
+        break;
+        case DXF_UNDEF:
+            iIndex = 9;
+        break;
+        case DXF_R13:
+            iIndex = 10;
+        break;
+        case DXF_R14:
+            iIndex = 11;
+        break;
+        case DXF_R2000:
+            iIndex = 12;
+        break;
+        case DXF_R2004:
+            iIndex = 13;
+        break;
+        case DXF_R2007:
+            iIndex = 14;
+        break;
+        case DXF_R2010:
+            iIndex = 15;
+        break;
+        case DXF_R2013:
+            iIndex = 16;
+        break;
+        case DXF_R2018:
+            iIndex = 17;
+        break;
+        default:
+            iIndex = 0;
+        break;
+    }
+
+    return gszCADVersions[iIndex];
+}
 
 /**
  * @brief Get library version number as major * 10000 + minor * 100 + rev

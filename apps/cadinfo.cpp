@@ -112,7 +112,13 @@ int main(int argc, char *argv[])
 
     if (pCADFile == nullptr)
     {
-        cerr << "Open CAD file " << (pszCADFilePath == NULL ? "NULL" : pszCADFilePath) << " failed.\n";
+        if(GetLastErrorCode() == CADErrorCodes::UNSUPPORTED_VERSION)
+        {
+            const char* pszVersion = (pszCADFilePath == NULL ? "Unknown" : GetCADFileFormat(pszCADFilePath));
+            cerr << "Open CAD file " << (pszCADFilePath == NULL ? "NULL" : pszCADFilePath) << " failed, unsupported version " << pszVersion << ".\n";
+        }
+        else
+            cerr << "Open CAD file " << (pszCADFilePath == NULL ? "NULL" : pszCADFilePath) << " failed.\n";
         return EXIT_FAILURE;
     }
 

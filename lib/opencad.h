@@ -53,7 +53,7 @@
 #ifndef OCAD_EXTERN
 
 #ifdef OCAD_STATIC
-  #define OCAD_EXTERN extern
+  #define OCAD_EXTERN
 #else
 #  if defined (_MSC_VER)
 #    ifdef OCAD_EXPORTS
